@@ -138,6 +138,58 @@ async function scrapePage(url) {
       }
     );
 
+    // evaluate page for element with given selector
+    const eventOrganizer = await page.$$eval(
+      '.tribe-organizer',
+      (eventOrganizer) => {
+        // loop through array | grab text, trim, and store to array object
+        const organizer = eventOrganizer.map((organizer) =>
+          organizer.textContent.trim()
+        );
+
+        // provide check if no event time given on detail page
+        if (organizer[0] === undefined) {
+          return 'no organizer given';
+        } else {
+          // return the first index to pull out of array
+          return organizer[0];
+        }
+      }
+    );
+
+    // evaluate page for element with given selector
+    const organizerSite = await page.$$eval(
+      '.tribe-organizer-url a',
+      (organizerSite) => {
+        // loop through array | grab text, trim, and store to array object
+        const organizerUrl = organizerSite.map(
+          (organizerUrl) => organizerUrl.href
+        );
+
+        // provide check if no event time given on detail page
+        if (organizerUrl[0] === undefined) {
+          return 'no organizer website given';
+        } else {
+          // return the first index to pull out of array
+          return organizerUrl[0];
+        }
+      }
+    );
+
+    // evaluate page for element with given selector
+    const eventVenue = await page.$$eval('.tribe-venue', (eventVenue) => {
+      // loop through array | grab text, trim, and store to array object
+      const venue = eventVenue.map((venue) => venue.textContent);
+
+      // provide check if no event time given on detail page
+      if (venue[0] === undefined) {
+        return 'no venue given';
+      } else {
+        // return the first index to pull out of array
+        return venue[0];
+      }
+    });
+
     // store data from detail page scrapes to key value pairs in event object
     const event = {
       title: eventTitle,
@@ -146,6 +198,9 @@ async function scrapePage(url) {
       cost: eventCost,
       category: eventCategory,
       website: eventWebsite,
+      organizer: eventOrganizer,
+      organizer_url: organizerSite,
+      venue: eventVenue,
     };
 
     // convert JS object to JSON string
