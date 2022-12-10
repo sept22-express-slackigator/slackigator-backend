@@ -85,11 +85,48 @@ async function scrapePage(url) {
       }
     );
 
+    // evaluate page for element with given selector
+    const eventCost = await page.$$eval(
+      '.tribe-events-event-cost',
+      (eventCost) => {
+        // loop through array | grab text, trim, and store to array object
+        const cost = eventCost.map((cost) => cost.textContent.trim());
+
+        // provide check if no event time given on detail page
+        if (cost[0] === undefined) {
+          return 'See event page for cost!';
+        } else {
+          // return the first index to pull out of array
+          return cost[0];
+        }
+      }
+    );
+
+    const eventCategory = await page.$$eval(
+      '.tribe-events-event-categories',
+      (eventCategory) => {
+        // loop through array | grab text, trim, and store to array object
+        const category = eventCategory.map((category) =>
+          category.textContent.trim()
+        );
+
+        // provide check if no event time given on detail page
+        if (category[0] === undefined) {
+          return;
+        } else {
+          // return the first index to pull out of array
+          return category[0];
+        }
+      }
+    );
+
     // store data from detail page scrapes to key value pairs in event object
     const event = {
       title: eventTitle,
       date: eventDate,
       time: eventTime,
+      cost: eventCost,
+      category: eventCategory,
     };
 
     // convert JS object to JSON string
@@ -99,7 +136,7 @@ async function scrapePage(url) {
     // eslint-disable-next-line no-console
     console.log('===================================');
     // eslint-disable-next-line no-console
-    console.log('event object{} console log', [detailUrl], jsonEvent);
+    console.log('event object{} console log', [detailUrl], event);
     // eslint-disable-next-line no-console
     console.log('===================================');
   }
