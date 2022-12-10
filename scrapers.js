@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer');
+// const { Event } = require('./lib/models/Event');
 
 async function scrapePage(url) {
   const browser = await puppeteer.launch();
@@ -14,5 +15,6 @@ async function scrapePage(url) {
 
   browser.close();
 }
+// await Event.insert(rawTxt);
 
 scrapePage('https://globalpdx.org/events/list/');
