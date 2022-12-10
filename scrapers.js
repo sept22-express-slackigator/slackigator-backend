@@ -102,6 +102,7 @@ async function scrapePage(url) {
       }
     );
 
+    // evaluate page for element with given selector
     const eventCategory = await page.$$eval(
       '.tribe-events-event-categories',
       (eventCategory) => {
@@ -112,10 +113,27 @@ async function scrapePage(url) {
 
         // provide check if no event time given on detail page
         if (category[0] === undefined) {
-          return;
+          return 'no category given';
         } else {
           // return the first index to pull out of array
           return category[0];
+        }
+      }
+    );
+
+    // evaluate page for element with given selector
+    const eventWebsite = await page.$$eval(
+      '.tribe-events-event-url a',
+      (eventWebsite) => {
+        // loop through array | grab text, trim, and store to array object
+        const website = eventWebsite.map((website) => website.textContent);
+
+        // provide check if no event time given on detail page
+        if (website[0] === undefined) {
+          return 'no site given';
+        } else {
+          // return the first index to pull out of array
+          return website[0];
         }
       }
     );
@@ -127,10 +145,11 @@ async function scrapePage(url) {
       time: eventTime,
       cost: eventCost,
       category: eventCategory,
+      website: eventWebsite,
     };
 
     // convert JS object to JSON string
-    const jsonEvent = JSON.stringify(event);
+    // const jsonEvent = JSON.stringify(event);
 
     // log the results
     // eslint-disable-next-line no-console
