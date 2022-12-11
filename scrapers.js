@@ -1,4 +1,6 @@
 const puppeteer = require('puppeteer');
+const fs = require('fs');
+const { Event } = require('./lib/models/Event');
 
 // create function to scrape page with list of upcoming events
 async function scrapePage(url) {
@@ -29,6 +31,8 @@ async function scrapePage(url) {
 
   // log to see array of event urls
   // console.log('before the for loop', grabEventDetailUrls);
+
+  const upcomingEvents = [];
 
   // iterate through url array
   for (let detailUrl = 0; detailUrl < grabEventDetailUrls.length; detailUrl++) {
@@ -226,18 +230,29 @@ async function scrapePage(url) {
     // convert JS object to JSON string
     // const jsonEvent = JSON.stringify(event);
 
+    upcomingEvents.push(event);
+
     // log the results
     // eslint-disable-next-line no-console
-    console.log('===================================');
+    // console.log('===================================');
     // eslint-disable-next-line no-console
-    console.log('event object{} console log', [detailUrl], event);
+    // console.log('event object{} console log', [detailUrl], event);
     // eslint-disable-next-line no-console
-    console.log('===================================');
+    // console.log('===================================');
   }
+
+  fs.writeFile('./events.json', JSON.stringify(upcomingEvents), (err) =>
+    // eslint-disable-next-line no-console
+    err ? console.log(err) : null
+  );
 
   // close the headless browser session
   await browser.close();
+
+  return upcomingEvents;
 }
 
 // call function with list page url
 scrapePage('https://globalpdx.org/events/list/');
+
+// module.exports = { scrapePage };
