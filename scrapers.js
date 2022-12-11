@@ -190,6 +190,25 @@ async function scrapePage(url) {
       }
     });
 
+    // evaluate page for element with given selector
+    const eventDescription = await page.$$eval(
+      '.tribe-events-single-event-description.tribe-events-content',
+      (eventDescription) => {
+        // loop through array | grab text, trim, and store to array object
+        const description = eventDescription.map((description) =>
+          description.textContent.replace(/[\t/\n]/g, '')
+        );
+
+        // provide check if no event time given on detail page
+        if (description[0] === undefined) {
+          return 'no description given';
+        } else {
+          // return the first index to pull out of array
+          return description[0];
+        }
+      }
+    );
+
     // store data from detail page scrapes to key value pairs in event object
     const event = {
       title: eventTitle,
@@ -201,6 +220,7 @@ async function scrapePage(url) {
       organizer: eventOrganizer,
       organizer_url: organizerSite,
       venue: eventVenue,
+      description: eventDescription,
     };
 
     // convert JS object to JSON string
