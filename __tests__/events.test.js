@@ -15,11 +15,20 @@ describe('events routes', () => {
   it('POST /api/v1/events should post a new event', async () => {
     const resp = await request(app)
       .post('/api/v1/events')
-      .send({ detail: 'butt' });
+      .send({ description: 'butt' });
     expect(resp.status).toBe(200);
     expect(resp.body).toEqual({
       id: expect.any(String),
-      detail: 'butt',
+      title: expect.any(String),
+      date: expect.any(String),
+      time: expect.any(String),
+      cost: expect.any(String),
+      category: expect.any(String),
+      website: expect.any(String),
+      organizer: expect.any(String),
+      organizer_url: expect.any(String),
+      venue: expect.any(String),
+      description: expect.any(String),
     });
   });
 });
