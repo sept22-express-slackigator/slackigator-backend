@@ -1,6 +1,5 @@
 const puppeteer = require('puppeteer');
 const fs = require('fs');
-const { Event } = require('./lib/models/Event');
 
 // create function to scrape page with list of upcoming events
 async function scrapePage(url) {
