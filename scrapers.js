@@ -226,32 +226,26 @@ async function scrapePage(url) {
       description: eventDescription,
     };
 
-    // convert JS object to JSON string
-    // const jsonEvent = JSON.stringify(event);
-
     upcomingEvents.push(event);
-
-    // log the results
-    // eslint-disable-next-line no-console
-    // console.log('===================================');
-    // eslint-disable-next-line no-console
-    // console.log('event object{} console log', [detailUrl], event);
-    // eslint-disable-next-line no-console
-    // console.log('===================================');
   }
 
-  fs.writeFile('./events.json', JSON.stringify(upcomingEvents), (err) =>
-    // eslint-disable-next-line no-console
-    err ? console.log(err) : null
+  fs.writeFile(
+    './eventsjson.js',
+    'const events = ' +
+      JSON.stringify(upcomingEvents) +
+      ';' +
+      ' module.exports = { events };',
+    (err) =>
+      // eslint-disable-next-line no-console
+      err ? console.log(err) : null
   );
 
   // close the headless browser session
   await browser.close();
 
+  // return all scraped events and their details
   return upcomingEvents;
 }
 
 // call function with list page url
 scrapePage('https://globalpdx.org/events/list/');
-
-// module.exports = { scrapePage };
