@@ -1,6 +1,8 @@
 -- Use this file to define your SQL tables
 -- The SQL in this file will be executed when you run `npm run setup-db`
-DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS scraper CASCADE;
+DROP TABLE IF EXISTS filtered_events CASCADE;
 
 DROP TABLE IF EXISTS events;
 
@@ -12,7 +14,4 @@ CREATE TABLE users (
   last_name VARCHAR NOT NULL
 );
 
-CREATE TABLE events (
-  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  detail VARCHAR NOT NULL
-)
+
