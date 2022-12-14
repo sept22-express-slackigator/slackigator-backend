@@ -105,3 +105,5 @@ describe('user routes', () => {
     expect(resp.status).toBe(204);
   });
 });
+
+// jake didn't have the event.test.js file locally, just making a comment then pushing
