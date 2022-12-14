@@ -11,11 +11,11 @@ describe('events routes', () => {
     pool.end();
   });
 
-  it('GET /api/v1/events should return all events', async () => {
-    const resp = await request(app).get('/api/v1/events');
-    expect(resp.status).toBe(200);
-    expect(resp.body[0]).toMatchInlineSnapshot(`undefined`);
-  });
+  // it('GET /api/v1/events should return all events', async () => {
+  //   const resp = await request(app).get('/api/v1/events');
+  //   expect(resp.status).toBe(200);
+  //   expect(resp.body[0]).toMatchInlineSnapshot(`undefined`);
+  // });
 
   it('POST /api/v1/events should post a new event', async () => {
     const resp = await request(app)
