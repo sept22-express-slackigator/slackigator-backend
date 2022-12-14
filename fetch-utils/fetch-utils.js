@@ -1,14 +1,14 @@
-const Event = require('../lib/models/Event');
-const fetch = require('node-fetch');
+// const Event = require('../lib/models/Event');
+// const fetch = require('node-fetch');
 
-async function getScraped() {
-  const dbEvents = await Event.getAll();
-  return dbEvents;
-}
+// async function getScraped() {
+//   const dbEvents = await Event.getAll();
+//   return dbEvents;
+// }
 
-const inFetchEvents = getScraped();
+// const inFetchEvents = getScraped();
 
-console.log(inFetchEvents);
+// console.log(inFetchEvents);
 
 // const payload = {
 //   channel: 'webhook-tests',
