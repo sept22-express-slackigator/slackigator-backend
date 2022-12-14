@@ -6,6 +6,7 @@ async function getScraped() {
 }
 
 const inFetchEvents = getScraped();
+
 console.log(inFetchEvents);
 
 const fetch = require('node-fetch');
