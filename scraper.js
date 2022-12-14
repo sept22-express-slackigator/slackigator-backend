@@ -8,7 +8,7 @@ async function grabScraped() {
   const browser = await startBrowser();
   const events = await scraperObject.scraper(browser);
   try {
-    await Promise.all(events.map((event) => Event.insert(event)));
+    await Promise.allSettled(events.map((event) => Event.insert(event)));
   } catch (e) {
     console.error(e);
   }
