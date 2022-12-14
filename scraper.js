@@ -8,3 +8,5 @@ async function grabScraped() {
   return scrapedList;
 }
 grabScraped();
+
+// module.exports = { grabScraped };
