@@ -17,7 +17,8 @@ CREATE TABLE scraper (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   title VARCHAR,
   date VARCHAR,
-  detail_url VARCHAR UNIQUE
+  detail_url VARCHAR UNIQUE,
+  add_to_cal_url VARCHAR
 );
 
 
