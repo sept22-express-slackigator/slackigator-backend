@@ -18,6 +18,7 @@ CREATE TABLE scraper (
   title VARCHAR,
   date VARCHAR,
   detail_url VARCHAR UNIQUE,
+  new_post BOOLEAN DEFAULT true,
   add_to_cal_url VARCHAR
 );
 
