@@ -18,6 +18,3 @@ async function grabScraped() {
 nodeCron.schedule('*/1 * * * *', async () => {
   await grabScraped();
 });
-// grabScraped();
-
-// module.exports = { grabScraped };
