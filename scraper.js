@@ -21,5 +21,5 @@ grabScraped();
 nodeCron.schedule(' 1 * * * *', async () => {
   await grabScraped();
 },
-{timezone: "America/Los_Angeles"}
+{ timezone: 'America/Los_Angeles' }
 );
