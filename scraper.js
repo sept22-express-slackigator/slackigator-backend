@@ -1,7 +1,7 @@
 const dotenv = require('dotenv');
 dotenv.config();
 const { startBrowser } = require('./lib/services/scraper/browser.js');
-const nodeCron = require('node-cron');
+// const nodeCron = require('node-cron');
 const scraperObject = require('./lib/services/scraper/pageScraper.js');
 const Event = require('./lib/models/Event.js');
 async function grabScraped() {
@@ -15,8 +15,8 @@ async function grabScraped() {
   return events;
 }
 
-nodeCron.schedule(' 0 14 * * *', async () => {
-  await grabScraped();
-},
-{timezone: "America/Los_Angeles"}
-);
+// nodeCron.schedule(' 0 14 * * *', async () => {
+//   await grabScraped();
+// },
+// {timezone: "America/Los_Angeles"}
+// );
