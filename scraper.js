@@ -15,11 +15,9 @@ async function grabScraped() {
   return events;
 }
 
-grabScraped();
+// grabScraped();
 
 
-nodeCron.schedule(' 1 * * * *', async () => {
+nodeCron.schedule('*/1 * * * *', async () => {
   await grabScraped();
-},
-{ timezone: 'America/Los_Angeles' }
-);
+});
