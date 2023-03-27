@@ -15,6 +15,9 @@ async function grabScraped() {
   return events;
 }
 
+grabScraped();
+
+
 // nodeCron.schedule(' 0 14 * * *', async () => {
 //   await grabScraped();
 // },
